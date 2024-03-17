@@ -1,13 +1,14 @@
 import express from 'express';
-import {StatusCodes} from "http-status-codes";
+import userRoutes from "./user.routers";
+import mainRoutes from "../main.routes";
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
-app.get('/hello', (req,res) => {
-    res.status(StatusCodes.OK); // status OK
-    res.send('Hello you');
-})
+app.use(express.json());
+
+app.use('/api/v1',mainRoutes)
+app.use('/api/v1/users', userRoutes)
 
 app.listen(port, ()=> {
     console.log(`server started on http://localhost:${port}`)
